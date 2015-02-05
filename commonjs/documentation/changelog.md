@@ -1,6 +1,7 @@
 # Change Log
 <pre>
 v3.2.8  Updating example to show trayClickFocusedApp and trayClickLaunchedApp payload [TIMODOPEN-370]
+        Removing old OAuth examples [MOD-1889]
 
 v3.2.7  Updating example to use the isGooglePlayServicesAvailable method [TIMODOPEN-458]
 

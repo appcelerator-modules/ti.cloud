@@ -14,8 +14,7 @@ WindowManager.include(
     '/windows/users/search',
     '/windows/users/show',
     '/windows/users/showMe',
-    '/windows/users/update',
-	'/windows/users/secureIdentity'
+    '/windows/users/update'
 );
 exports['Users'] = function (evt) {
     var win = WindowManager.createWindow({
@@ -28,7 +27,6 @@ exports['Users'] = function (evt) {
             'Login Status',
             'Create User',
             'Login User',
-	        'Secure Identity',
             'Request Reset Password',
             'Resend Confirmation',
             'Show Current User',
