@@ -11,6 +11,7 @@ com.cocoafish.js.sdk.utils.cookieMap = [];
 com.cocoafish.js.sdk.utils.cookieMap[com.cocoafish.constants.sessionId] = 'sessionId';
 com.cocoafish.js.sdk.utils.cookieMap[com.cocoafish.constants.accessToken] = 'accessToken';
 com.cocoafish.js.sdk.utils.cookieMap[com.cocoafish.constants.expiresIn] = 'expiresIn';
+com.cocoafish.js.sdk.utils.securityManager = null;
 
 com.cocoafish.js.sdk.utils.getCookie = function( name ) {
 	var friendlyName = com.cocoafish.js.sdk.utils.cookieMap[name];
@@ -178,7 +179,8 @@ com.cocoafish.js.sdk.utils.sendAppceleratorRequest = function (url, method, data
 	            }
             }
             callback(data);
-        }
+        },
+        securityManager: com.cocoafish.js.sdk.utils.securityManager
     });
 
     // for GET request only
@@ -285,4 +287,15 @@ com.cocoafish.js.sdk.utils.copy = function(target, source, overwrite, transform)
     }
   }
   return target;
+};
+
+/**
+ * Sets security manager to defend again man the middle attack
+ *
+ * @access private
+ * @param securityManager {Object}  contains url and cert for validation
+ *
+ */
+com.cocoafish.js.sdk.utils.setSecurityManager = function(securityManager) {
+    com.cocoafish.js.sdk.utils.securityManager = securityManager;
 };

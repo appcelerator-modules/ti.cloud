@@ -119,6 +119,22 @@ function retrieveStoredSession() {
     return ACS.retrieveStoredSession();
 }
 
+//load the certificate for validation on https. only available if https module exists
+function createX509CertificatePinningSecurityManager(data) {
+    var httpsModuleExists = true;
+    try{
+       var https = require('appcelerator.https');    
+    }catch(e){
+        Ti.API.error(e + ' SecurityManager not set.');
+        httpsModuleExists = false;
+    }
+    if (httpsModuleExists) {
+        // Use the module to create a Security Manager that authenticates the specified URLs
+        var securityManager = https.createX509CertificatePinningSecurityManager(data);
+        com.cocoafish.js.sdk.utils.setSecurityManager(securityManager);
+    }
+
+};
 function secureAuthExecutor(data, callback) {
     requireArgument('callback', callback, 'function');
 
@@ -184,6 +200,7 @@ BedFrame.build(Cloud, {
     children: [
         // Top level methods not associated with a namespace
         { method: 'sendRequest', executor: genericExecutor },
+        { method: 'createX509CertificatePinningSecurityManager', executor: createX509CertificatePinningSecurityManager },
         { method: 'hasStoredSession', executor: hasStoredSession },
         { method: 'retrieveStoredSession', executor: retrieveStoredSession },
         {
