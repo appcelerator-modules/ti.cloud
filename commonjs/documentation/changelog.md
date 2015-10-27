@@ -1,5 +1,9 @@
 # Change Log
 <pre>
+v3.2.10 Include missing parameters in logout [MOD-1827]
+
+v3.2.9  Include man in the middle attack security for Cloud API calls [TIMOB-19007]
+
 v3.2.8  Updating example to show trayClickFocusedApp and trayClickLaunchedApp payload [TIMODOPEN-370]
         Removing old OAuth examples [MOD-1889]
 
