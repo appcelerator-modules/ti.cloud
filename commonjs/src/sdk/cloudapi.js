@@ -449,7 +449,7 @@ BedFrame.build(Cloud, {
                 { method: 'search', executor: dataOptionalExecutor },
                 { method: 'query', executor: dataOptionalExecutor },
                 { method: 'update', verb: 'PUT' },
-                { method: 'logout', executor: dataExcludedResetSessionExecutor },
+                { method: 'logout', executor: dataOptionalResetSessionExecutor },
                 { method: 'remove', restMethod: 'delete', verb: 'DELETE', executor: dataOptionalResetSessionExecutor },
                 { method: 'requestResetPassword', restMethod: 'request_reset_password' },
                 { method: 'resendConfirmation', restMethod: 'resend_confirmation' }
