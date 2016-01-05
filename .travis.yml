@@ -1,14 +1,19 @@
-language: javascript
+language: objective-c
+osx_image: xcode7.1
 env:
  global:
    - "MODULE_NAME=ti.cloud" 
 before_install:
     - MODULE_ROOT=$PWD
+    - sudo easy_install simplejson
 install:
     - cd $MODULE_ROOT
     - curl -o install.sh https://raw.githubusercontent.com/appcelerator-modules/ci/master/travis/install.sh
-    - source install.sh
+    - source install.sh -s "5.1.2.v20151216190036"
 script: 
+    - cd $MODULE_ROOT/commonjs
+    - ./build.py -p "/Users/travis/Library/Application Support/Titanium/mobilesdk/osx/" -s "5.1.2.v20151216190036"
+    - cd $MODULE_ROOT
     - curl -o script.sh https://raw.githubusercontent.com/appcelerator-modules/ci/master/travis/script.sh
     - source script.sh
 after_success: # and this only on success

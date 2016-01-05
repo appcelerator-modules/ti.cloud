@@ -475,5 +475,9 @@ if __name__ == '__main__':
 	if len(sys.argv) > 1 and sys.argv[1].lower() in ['help', '--help', '-h']:
 		print 'Usage: %s [<deploytype>]' % os.path.basename(sys.argv[0])
 		sys.exit(1)
+	if len(sys.argv) > 1 and sys.argv[3].lower() in ['--sdk', '-s']:
+		version = sys.argv[4]
+	if len(sys.argv) > 1 and sys.argv[1].lower() in ['--pathsdk', '-p']:
+		sdk_path = r''+sys.argv[2]+version	
 	Compiler('production' if len(sys.argv) <= 1 else sys.argv[1].lower())
 	sys.exit(0)
