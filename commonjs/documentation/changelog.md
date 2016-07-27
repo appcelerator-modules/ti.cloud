@@ -1,5 +1,10 @@
 # Change Log
 <pre>
+v3.2.11 Updated the example code. [MOD-2138]
+        Updated 'windows' to 'views'
+        Removed deprecated methods
+        Fixed non-visible text on android
+        
 v3.2.10 Include missing parameters in logout [MOD-1827]
 
 v3.2.9  Include man in the middle attack security for Cloud API calls [TIMOB-19007]
