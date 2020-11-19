@@ -6,3 +6,4 @@ tmp
 build.log
 commonjs/drillbit/tests/cloud/tiapp.xml
 ti.cloud.js
+node_modules/
