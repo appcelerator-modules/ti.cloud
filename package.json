@@ -1,0 +1,41 @@
+{
+  "name": "@titanium-sdk/ti.cloud",
+  "version": "3.2.11",
+  "description": "Appcelerator Cloud Services",
+  "scripts": {
+    "commit": "git-cz",
+    "lint": "npm run lint:docs",
+    "lint:docs": "tdoc-validate -w Titanium.Proxy,Titanium.Module,SecurityManagerProtocol apidoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appcelerator-modules/ti.cloud.git"
+  },
+  "bugs": {
+    "url": "https://github.com/appcelerator-modules/ti.cloud/issues"
+  },
+  "homepage": "https://github.com/appcelerator-modules/ti.cloud#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "commitizen": "^4.0.3",
+    "husky": "^4.2.1",
+    "titanium-docgen": "^4.2.0"
+  },
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
