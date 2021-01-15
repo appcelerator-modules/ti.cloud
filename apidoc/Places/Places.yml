@@ -2,7 +2,6 @@ name: Modules.Cloud.Places
 summary: Provides methods for accessing ArrowDB places.
 extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
-
 methods:
   - name: create
     summary: Create a new place.
@@ -115,132 +114,144 @@ examples:
     example: |
         This example creates a new place and checks the response.
         
-            Cloud.Places.create({
-                name: 'Appcelerator HQ',
-                state: 'California',
-                website: 'https://www.appcelerator.com'
-            }, function (e) {
-                if (e.success) {
-                    var place = e.places[0];
-                    alert('Success:\n' +
-                        'id: ' + place.id + '\n' +
-                        'name: ' + place.name + '\n' +
-                        'updated_at: ' + place.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Places.create({
+            name: 'Appcelerator HQ',
+            state: 'California',
+            website: 'https://www.appcelerator.com'
+        }, function (e) {
+            if (e.success) {
+                var place = e.places[0];
+                alert('Success:\n' +
+                    'id: ' + place.id + '\n' +
+                    'name: ' + place.name + '\n' +
+                    'updated_at: ' + place.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Show a Place
     example: |
         This example retrieves information about a place and checks the response.
         
-            Cloud.Places.show({
-                place_id: savedPlaceId
-            }, function (e) {
-                if (e.success) {
-                    var place = e.places[0];
-                    alert('Success:\n' +
-                        'id: ' + place.id + '\n' +
-                        'name: ' + place.name + '\n' +
-                        'updated_at: ' + place.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Places.show({
+            place_id: savedPlaceId
+        }, function (e) {
+            if (e.success) {
+                var place = e.places[0];
+                alert('Success:\n' +
+                    'id: ' + place.id + '\n' +
+                    'name: ' + place.name + '\n' +
+                    'updated_at: ' + place.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Search for Places
     example: |
         This example searches for places and checks the response.
         
-            Cloud.Places.search({
-                latitude: lat,
-                longitude: lon
-            }, function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.places.length);
-                    for (var i = 0; i < e.places.length; i++) {
-                        var place = e.places[i];
-                        alert('id: ' + place.id + '\n' +
-                              'name: ' + place.name + '\n' +
-                              'longitude: ' + place.longitude + '\n' +
-                              'latitude: ' + place.latitude + '\n' +
-                              'updated_at: ' + place.updated_at);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
+        ``` js
+        Cloud.Places.search({
+            latitude: lat,
+            longitude: lon
+        }, function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.places.length);
+                for (var i = 0; i < e.places.length; i++) {
+                    var place = e.places[i];
+                    alert('id: ' + place.id + '\n' +
+                          'name: ' + place.name + '\n' +
+                          'longitude: ' + place.longitude + '\n' +
+                          'latitude: ' + place.latitude + '\n' +
+                          'updated_at: ' + place.updated_at);
                 }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Query for Places
     example: |
         This example requests a list of places and checks the response.
         
-            Cloud.Places.query({
-                page: 1,
-                per_page: 20,
-                where: {
-                    lnglat: {
-                        '$nearSphere': [-122.23,37.12],
-                        '$maxDistance': 0.00126
-                    }
+        ``` js
+        Cloud.Places.query({
+            page: 1,
+            per_page: 20,
+            where: {
+                lnglat: {
+                    '$nearSphere': [-122.23,37.12],
+                    '$maxDistance': 0.00126
                 }
-            }, function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.places.length);
-                    for (var i = 0; i < e.places.length; i++) {
-                        var place = e.places[i];
-                        alert('id: ' + place.id + '\n' +
-                              'name: ' + place.name + '\n' +
-                              'longitude: ' + place.longitude + '\n' +
-                              'latitude: ' + place.latitude + '\n' +
-                              'updated_at: ' + place.updated_at);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
+            }
+        }, function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.places.length);
+                for (var i = 0; i < e.places.length; i++) {
+                    var place = e.places[i];
+                    alert('id: ' + place.id + '\n' +
+                          'name: ' + place.name + '\n' +
+                          'longitude: ' + place.longitude + '\n' +
+                          'latitude: ' + place.latitude + '\n' +
+                          'updated_at: ' + place.updated_at);
                 }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Update a Place
     example: |
         This example updates a place and checks the response.
         
-            Cloud.Places.update({
-                place_id: savedPlaceId,
-                city: 'Mountain View'
-            }, function (e) {
-                if (e.success) {
-                    var place = e.places[0];
-                    alert('Success:\n' +
-                        'id: ' + place.id + '\n' +
-                        'name: ' + place.name + '\n' +
-                        'updated_at: ' + place.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Places.update({
+            place_id: savedPlaceId,
+            city: 'Mountain View'
+        }, function (e) {
+            if (e.success) {
+                var place = e.places[0];
+                alert('Success:\n' +
+                    'id: ' + place.id + '\n' +
+                    'name: ' + place.name + '\n' +
+                    'updated_at: ' + place.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Remove a Place
     example: |
         This example deletes a place and checks the response.
         
-            Cloud.Places.remove({
-                place_id: savedPlaceId
-            }, function (e) {
-                if (e.success) {
-                    alert('Success');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Places.remove({
+            place_id: savedPlaceId
+        }, function (e) {
+            if (e.success) {
+                alert('Success');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudPlacesResponse

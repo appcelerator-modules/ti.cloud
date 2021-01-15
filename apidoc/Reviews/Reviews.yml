@@ -2,7 +2,6 @@ name: Modules.Cloud.Reviews
 summary: Provides methods for accessing ArrowDB reviews.
 extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
-
 methods:
   - name: create
     summary: Add a review, comment, rating, or like.
@@ -93,111 +92,121 @@ examples:
     example: |
         This example creates a new review and checks the response.
         
-            Cloud.Reviews.create({
-                post_id: savedPostId,
-                rating: 1,
-                content: 'Good'
-            }, function (e) {
-                if (e.success) {
-                    var review = e.reviews[0];
-                    alert('Success:\n' +
-                        'id: ' + review.id + '\n' +
-                        'rating: ' + review.rating + '\n' +
-                        'content: ' + review.content + '\n' +
-                        'updated_at: ' + review.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Reviews.create({
+            post_id: savedPostId,
+            rating: 1,
+            content: 'Good'
+        }, function (e) {
+            if (e.success) {
+                var review = e.reviews[0];
+                alert('Success:\n' +
+                    'id: ' + review.id + '\n' +
+                    'rating: ' + review.rating + '\n' +
+                    'content: ' + review.content + '\n' +
+                    'updated_at: ' + review.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Show a Review
     example: |
         This example retrieves information about a review and checks the response.
         
-            Cloud.Reviews.show({
-                post_id: savedPostId,
-                review_id: savedReviewId
-            }, function (e) {
-                if (e.success) {
-                    var review = e.reviews[0];
-                    alert('Success:\n' +
-                        'id: ' + review.id + '\n' +
-                        'rating: ' + review.rating + '\n' +
-                        'content: ' + review.content + '\n' +
-                        'updated_at: ' + review.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Reviews.show({
+            post_id: savedPostId,
+            review_id: savedReviewId
+        }, function (e) {
+            if (e.success) {
+                var review = e.reviews[0];
+                alert('Success:\n' +
+                    'id: ' + review.id + '\n' +
+                    'rating: ' + review.rating + '\n' +
+                    'content: ' + review.content + '\n' +
+                    'updated_at: ' + review.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Query for Reviews
     example: |
         This example requests a list of reviews and checks the response.
         
-            Cloud.Reviews.query({
-                page: 1,
-                per_page: 20,
-                where: {
-                    rating: { '$gt': 5.0 }
+        ``` js
+        Cloud.Reviews.query({
+            page: 1,
+            per_page: 20,
+            where: {
+                rating: { '$gt': 5.0 }
+            }
+        }, function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.reviews.length);
+                for (var i = 0; i < e.reviews.length; i++) {
+                    var review = e.reviews[i];
+                    alert('id: ' + review.id + '\n' +
+                        'id: ' + review.id + '\n' +
+                        'rating: ' + review.rating + '\n' +
+                        'content: ' + review.content + '\n' +
+                        'updated_at: ' + review.updated_at);
                 }
-            }, function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.reviews.length);
-                    for (var i = 0; i < e.reviews.length; i++) {
-                        var review = e.reviews[i];
-                        alert('id: ' + review.id + '\n' +
-                            'id: ' + review.id + '\n' +
-                            'rating: ' + review.rating + '\n' +
-                            'content: ' + review.content + '\n' +
-                            'updated_at: ' + review.updated_at);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Update a Review
     example: |
         This example updates a review and checks the response.
         
-            Cloud.Reviews.update({
-                post_id: savedPostId,
-                review_id: savedReviewId,
-                rating: 100,
-                content: 'Very good!'
-            }, function (e) {
-                if (e.success) {
-                    var review = e.reviews[0];
-                    alert('Success:\n' +
-                        'id: ' + review.id + '\n' +
-                        'rating: ' + review.rating + '\n' +
-                        'content: ' + review.content + '\n' +
-                        'updated_at: ' + review.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Reviews.update({
+            post_id: savedPostId,
+            review_id: savedReviewId,
+            rating: 100,
+            content: 'Very good!'
+        }, function (e) {
+            if (e.success) {
+                var review = e.reviews[0];
+                alert('Success:\n' +
+                    'id: ' + review.id + '\n' +
+                    'rating: ' + review.rating + '\n' +
+                    'content: ' + review.content + '\n' +
+                    'updated_at: ' + review.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Remove a Review
     example: |
         This example deletes a review and checks the response.
         
-            Cloud.Reviews.remove({
-                post_id: savedPostId,
-                review_id: savedReviewId
-            }, function (e) {
-                if (e.success) {
-                    alert('Success');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Reviews.remove({
+            post_id: savedPostId,
+            review_id: savedReviewId
+        }, function (e) {
+            if (e.success) {
+                alert('Success');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudReviewsResponse

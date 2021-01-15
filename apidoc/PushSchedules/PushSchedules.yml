@@ -16,7 +16,6 @@ extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
 platforms: [android, iphone, ipad, macos]
 since: 3.2.0
-
 methods:
   - name: create
     summary: Schedules a push notification.
@@ -71,55 +70,61 @@ examples:
     example: |
         This example schedules a push notification to be sent only once within the five-day perid.
 
-            Cloud.PushSchedules.create({
-                schedule: {
-                    name: 'push schedule',
-                    start_time: '2015-09-05T10:11',
-                    recurrence: {
-                        interval: 'weekly',
-                        end_time: '2015-09-10T10:11'
-                    },
-                    push_notification: {
-                        payload: 'hello world',
-                        channel: 'channelOne'
-                    }
+        ``` js
+        Cloud.PushSchedules.create({
+            schedule: {
+                name: 'push schedule',
+                start_time: '2015-09-05T10:11',
+                recurrence: {
+                    interval: 'weekly',
+                    end_time: '2015-09-10T10:11'
+                },
+                push_notification: {
+                    payload: 'hello world',
+                    channel: 'channelOne'
                 }
-            }, function(e) {
-                if (e.success) {
-                    Ti.API.info('Success! \n id: ' + e.push_schedules[0].id);
-                } else {
-                    Ti.API.error('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+            }
+        }, function(e) {
+            if (e.success) {
+                Ti.API.info('Success! \n id: ' + e.push_schedules[0].id);
+            } else {
+                Ti.API.error('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
         
   - title: Remove a scheduled push notification
     example: |
         This example deletes the specified scheduled push notification.
 
-            Cloud.PushSchedules.remove({
-                ids: savedPushId
-            }, function(e){
-                if (e.success) {
-                    Ti.API.info("Success!");
-                } else {
-                    Ti.API.error('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.PushSchedules.remove({
+            ids: savedPushId
+        }, function(e){
+            if (e.success) {
+                Ti.API.info("Success!");
+            } else {
+                Ti.API.error('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
         
   - title: Query scheduled push notifications
     example: |
         This example retrieves all scheduled push notifications.
 
-            Cloud.PushSchedules.query({}, function(e) {
-                if (e.success) {
-                    Ti.API.info("List of scheduled push notifications:");
-                    e.push_schedules.forEach(function(push){
-                        Ti.API.info("\t" + push.name);
-                    });
-                } else {
-                    Ti.API.error('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.PushSchedules.query({}, function(e) {
+            if (e.success) {
+                Ti.API.info("List of scheduled push notifications:");
+                e.push_schedules.forEach(function(push){
+                    Ti.API.info("\t" + push.name);
+                });
+            } else {
+                Ti.API.error('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudPushSchedulesResponse

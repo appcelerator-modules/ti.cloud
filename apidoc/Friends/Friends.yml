@@ -2,7 +2,6 @@ name: Modules.Cloud.Friends
 summary: Provides methods for accessing ArrowDB friends.
 extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
-
 methods:
   - name: add
     summary: Add friends to the current user.
@@ -93,88 +92,98 @@ examples:
     example: |
         This example adds a friend and checks the response.
 
-            Cloud.Friends.add({
-                user_ids: checked.join(",")
-            }, function (e) {
-                if (e.success) {
-                    alert('Friend(s) added');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Friends.add({
+            user_ids: checked.join(",")
+        }, function (e) {
+            if (e.success) {
+                alert('Friend(s) added');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Show friend requests
     example: |
         This example shows pending friend requests and checks the response.
 
-            Cloud.Friends.requests(function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.friend_requests.length);
-                    for (var i = 0; i < e.friend_requests.length; i++) {
-                        var user = e.friend_requests[i].user;
-                        alert('id: ' + user.id + '\n' +
-                            'first name: ' + user.first_name + '\n' +
-                            'last name: ' + user.last_name);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
+        ``` js
+        Cloud.Friends.requests(function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.friend_requests.length);
+                for (var i = 0; i < e.friend_requests.length; i++) {
+                    var user = e.friend_requests[i].user;
+                    alert('id: ' + user.id + '\n' +
+                        'first name: ' + user.first_name + '\n' +
+                        'last name: ' + user.last_name);
                 }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Approve friend requests
     example: |
         This example approves pending friend requests and checks the response.
 
-            Cloud.Friends.approve({
-                user_ids: checked.join(",")
-            }, function (e) {
-                if (e.success) {
-                    alert('Friend(s) approved');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Friends.approve({
+            user_ids: checked.join(",")
+        }, function (e) {
+            if (e.success) {
+                alert('Friend(s) approved');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Remove friends
     example: |
         This example removes friends and checks the response.
 
-            Cloud.Friends.remove({
-                user_ids: checked.join(",")
-            }, function (e) {
-                if (e.success) {
-                    alert('Friend(s) removed');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Friends.remove({
+            user_ids: checked.join(",")
+        }, function (e) {
+            if (e.success) {
+                alert('Friend(s) removed');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Search for friends
     example: |
         This example requests information about particular friends and checks the response.
 
-            Cloud.Friends.search({
-                user_id: searchID
-            }, function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.users.length);
-                    for (var i = 0; i < e.users.length; i++) {
-                        var user = e.users[i];
-                        alert('id: ' + user.id + '\n' +
-                            'first name: ' + user.first_name + '\n' +
-                            'last name: ' + user.last_name);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
+        ``` js
+        Cloud.Friends.search({
+            user_id: searchID
+        }, function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.users.length);
+                for (var i = 0; i < e.users.length; i++) {
+                    var user = e.users[i];
+                    alert('id: ' + user.id + '\n' +
+                        'first name: ' + user.first_name + '\n' +
+                        'last name: ' + user.last_name);
                 }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudFriendsResponse

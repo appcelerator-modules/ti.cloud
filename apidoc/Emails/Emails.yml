@@ -2,7 +2,6 @@ name: Modules.Cloud.Emails
 summary: Provides methods for accessing ArrowDB Email service.
 extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
-
 methods:
   - name: send
     summary: Send an email to a list of email adresses.
@@ -26,17 +25,19 @@ examples:
     example: |
         This example sends an Email and checks the response.
         
-            Cloud.Emails.send({
-                template: 'welcome',
-                recipients: 'joe@company.com'
-            }, function (e) {
-                if (e.success) {
-                    alert('Success');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Emails.send({
+            template: 'welcome',
+            recipients: 'joe@company.com'
+        }, function (e) {
+            if (e.success) {
+                alert('Success');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudEmailsResponse

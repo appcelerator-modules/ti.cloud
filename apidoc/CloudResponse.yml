@@ -1,6 +1,5 @@
 name: CloudResponse
 summary: Argument passed to the callback when a request finishes successfully or erroneously.
-
 properties:
   - name: success
     summary: Indicates whether the request succeeded.

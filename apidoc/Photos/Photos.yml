@@ -2,7 +2,6 @@ name: Modules.Cloud.Photos
 summary: Provides methods for accessing ArrowDB photos.
 extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
-
 methods:
   - name: create
     summary: Create or upload a new photo.
@@ -110,129 +109,141 @@ examples:
     example: |
         This example creates a new photo and checks the response.
 
-            Cloud.Photos.create({
-                photo: Titanium.Filesystem.getFile('photo.jpg')
-            }, function (e) {
-                if (e.success) {
-                    var photo = e.photos[0];
-                    alert('Success:\n' +
-                        'id: ' + photo.id + '\n' +
-                        'filename: ' + photo.filename + '\n' +
-                        'size: ' + photo.size,
-                        'updated_at: ' + photo.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Photos.create({
+            photo: Titanium.Filesystem.getFile('photo.jpg')
+        }, function (e) {
+            if (e.success) {
+                var photo = e.photos[0];
+                alert('Success:\n' +
+                    'id: ' + photo.id + '\n' +
+                    'filename: ' + photo.filename + '\n' +
+                    'size: ' + photo.size,
+                    'updated_at: ' + photo.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Show a Photo
     example: |
         This example retrieves information about a photo and checks the response.
 
-            Cloud.Photos.show({
-                photo_id: savedPhotoId
-            }, function (e) {
-                if (e.success) {
-                    var photo = e.photos[0];
-                    alert('Success:\n' +
-                        'id: ' + photo.id + '\n' +
-                        'filename: ' + photo.filename + '\n' +
-                        'updated_at: ' + photo.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Photos.show({
+            photo_id: savedPhotoId
+        }, function (e) {
+            if (e.success) {
+                var photo = e.photos[0];
+                alert('Success:\n' +
+                    'id: ' + photo.id + '\n' +
+                    'filename: ' + photo.filename + '\n' +
+                    'updated_at: ' + photo.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Search for Photos
     example: |
         This example searches for photos and checks the response.
 
-            Cloud.Photos.search({
-                user_id: savedUserId
-            }, function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.photos.length);
-                    for (var i = 0; i < e.photos.length; i++) {
-                        var photo = e.photos[i];
-                        alert('id: ' + photo.id + '\n' +
-                              'name: ' + photo.name + '\n' +
-                              'filename: ' + photo.filename + '\n' +
-                              'updated_at: ' + photo.updated_at);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
+        ``` js
+        Cloud.Photos.search({
+            user_id: savedUserId
+        }, function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.photos.length);
+                for (var i = 0; i < e.photos.length; i++) {
+                    var photo = e.photos[i];
+                    alert('id: ' + photo.id + '\n' +
+                          'name: ' + photo.name + '\n' +
+                          'filename: ' + photo.filename + '\n' +
+                          'updated_at: ' + photo.updated_at);
                 }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Query for Photos
     example: |
         This example requests a list of photos and checks the response.
 
-            Cloud.Photos.query({
-                page: 1,
-                per_page: 20,
-                where: {
-                    coordinates: {
-                        '$nearSphere': [-122.23,37.12],
-                        '$maxDistance': 0.00126
-                    }
+        ``` js
+        Cloud.Photos.query({
+            page: 1,
+            per_page: 20,
+            where: {
+                coordinates: {
+                    '$nearSphere': [-122.23,37.12],
+                    '$maxDistance': 0.00126
                 }
-            }, function (e) {
-                if (e.success) {
-                    alert('Success:\n' +
-                        'Count: ' + e.photos.length);
-                    for (var i = 0; i < e.photos.length; i++) {
-                        var photo = e.photos[i];
-                        alert('id: ' + photo.id + '\n' +
-                              'name: ' + photo.name + '\n' +
-                              'filename: ' + photo.filename + '\n' +
-                              'updated_at: ' + photo.updated_at);
-                    }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
+            }
+        }, function (e) {
+            if (e.success) {
+                alert('Success:\n' +
+                    'Count: ' + e.photos.length);
+                for (var i = 0; i < e.photos.length; i++) {
+                    var photo = e.photos[i];
+                    alert('id: ' + photo.id + '\n' +
+                          'name: ' + photo.name + '\n' +
+                          'filename: ' + photo.filename + '\n' +
+                          'updated_at: ' + photo.updated_at);
                 }
-            });
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Update a Photo
     example: |
         This example updates a photo and checks the response.
 
-            Cloud.Photos.update({
-                photo_id: savedPhotoId,
-                photo: Titanium.Filesystem.getFile('newphoto.jpg'),
-                tags: 'mountains'
-            }, function (e) {
-                if (e.success) {
-                    var photo = e.photos[0];
-                    alert('Success:\n' +
-                        'id: ' + photo.id + '\n' +
-                        'filename: ' + photo.filename + '\n' +
-                        'updated_at: ' + photo.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Photos.update({
+            photo_id: savedPhotoId,
+            photo: Titanium.Filesystem.getFile('newphoto.jpg'),
+            tags: 'mountains'
+        }, function (e) {
+            if (e.success) {
+                var photo = e.photos[0];
+                alert('Success:\n' +
+                    'id: ' + photo.id + '\n' +
+                    'filename: ' + photo.filename + '\n' +
+                    'updated_at: ' + photo.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
   - title: Remove a Photo
     example: |
         This example deletes a photo and checks the response.
 
-            Cloud.Photos.remove({
-                photo_id: savedPhotoId
-            }, function (e) {
-                if (e.success) {
-                    alert('Success');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Photos.remove({
+            photo_id: savedPhotoId
+        }, function (e) {
+            if (e.success) {
+                alert('Success');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudPhotosResponse

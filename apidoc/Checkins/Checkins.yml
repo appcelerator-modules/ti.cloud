@@ -2,7 +2,6 @@ name: Modules.Cloud.Checkins
 summary: Provides methods for accessing ArrowDB checkins.
 extends: Titanium.Module
 excludes: { methods: [ 'addEventListener', 'fireEvent', 'removeEventListener',  ] }
-
 methods:
   - name: create
     summary: Check in to a place or event.
@@ -76,79 +75,87 @@ examples:
     example: |
         This example creates a checkin and checks the response.
         
-            Cloud.Checkins.create({
-                place_id: myPlaceId,
-                message: 'What a great view!',
-                photo: Titanium.Filesystem.getFile('photo.jpg')
-            }, function (e) {
-                if (e.success) {
-                    var checkin = e.checkins[0];
-                    alert('Success:\n' +
-                        'id: ' + checkin.id + '\n' +
-                        'place: ' + checkin.place.name);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Checkins.create({
+            place_id: myPlaceId,
+            message: 'What a great view!',
+            photo: Titanium.Filesystem.getFile('photo.jpg')
+        }, function (e) {
+            if (e.success) {
+                var checkin = e.checkins[0];
+                alert('Success:\n' +
+                    'id: ' + checkin.id + '\n' +
+                    'place: ' + checkin.place.name);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Query for Checkins
     example: |
         This example requests information about checkins and checks the response.
         
-            Cloud.Checkins.query({
-                page: 1,
-                per_page: 20,
-                order: '-updated_at'
-            }, function (e) {
-                if (e.success) {
-                    for (var i = 0; i < e.checkins.length; i++) {
-                        var checkin = e.checkins[i];
-                        alert('Success:\n' +
-                           'id: ' + checkin.id + '\n' +
-                           'place: ' + checkin.place.name + '\n' +
-                           'updated_at: ' + checkin.updated_at + '\n' +
-                           'user: ' + checkin.user.first_name + ' ' + checkin.user.last_name);
-                     }
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Checkins.query({
+            page: 1,
+            per_page: 20,
+            order: '-updated_at'
+        }, function (e) {
+            if (e.success) {
+                for (var i = 0; i < e.checkins.length; i++) {
+                    var checkin = e.checkins[i];
+                    alert('Success:\n' +
+                        'id: ' + checkin.id + '\n' +
+                        'place: ' + checkin.place.name + '\n' +
+                        'updated_at: ' + checkin.updated_at + '\n' +
+                        'user: ' + checkin.user.first_name + ' ' + checkin.user.last_name);
+                  }
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Show Checkin
     example: |
         This example requests information about a checkin and checks the response.
         
-            Cloud.Checkins.show({
-                checkin_id: myCheckinId
-            }, function (e) {
-                if (e.success) {
-                    var checkin = e.checkins[0];
-                    alert('Success:\n' +
-                        'id: ' + checkin.id + '\n' +
-                        'place: ' + checkin.place.name + '\n' +
-                        'updated_at: ' + checkin.updated_at);
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Checkins.show({
+            checkin_id: myCheckinId
+        }, function (e) {
+            if (e.success) {
+                var checkin = e.checkins[0];
+                alert('Success:\n' +
+                    'id: ' + checkin.id + '\n' +
+                    'place: ' + checkin.place.name + '\n' +
+                    'updated_at: ' + checkin.updated_at);
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
   
   - title: Remove Checkin
     example: |
         This example deletes a checkin and checks the response.
         
-            Cloud.Checkins.remove({
-                checkin_id: myCheckinId
-            }, function (e) {
-                if (e.success) {
-                    alert('Success');
-                } else {
-                    alert('Error:\n' +
-                        ((e.error && e.message) || JSON.stringify(e)));
-                }
-            });
+        ``` js
+        Cloud.Checkins.remove({
+            checkin_id: myCheckinId
+        }, function (e) {
+            if (e.success) {
+                alert('Success');
+            } else {
+                alert('Error:\n' +
+                    ((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+        ```
 
 ---
 name: CloudCheckinsResponse
